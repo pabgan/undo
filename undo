@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ "$2" = "usage" ] || [ $# = 1 ] 
+then
+  echo "  Undo item:"
+  echo "    undo ID" 
+  echo ""
+  exit
+fi
+
+# Ignore the fist parameter that will be "undo"
+shift
+for var in "$@"
+do
+	## we get the text of the item without the x
+	#toundo=$(head -n $var $TODO_FILE | tail -n 1 | sed 's/^x //')
+	## we remove the x
+	sed -i "${var}s/^x //" $TODO_FILE
+	sed -i "${var}s/^[A-Z]? \([0-9,-]\)\+ //" $TODO_FILE
+	echo $var $(head -n $var $TODO_FILE | tail -n 1)
+	echo "TODO: $var undone."
+done
+## we remove the creation date
+#tofollowup=$(sed 's/[0-9,-]\+ //' <(echo $tofollowup))
+## we DO the item
+#"$TODO_SH" command do "$line"
+## add new follow up item
+#"$TODO_SH" command add "@followup: $tofollowup t:$date"
