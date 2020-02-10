@@ -3,7 +3,9 @@
 if [ "$2" = "usage" ] || [ $# = 1 ] 
 then
   echo "  Undo item:"
-  echo "    undo ID" 
+  curcmd=`basename $0`
+  echo "    $curcmd [ID]"
+  echo "      undo task identified by ID"
   echo ""
   exit
 fi
